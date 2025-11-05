@@ -1,43 +1,40 @@
 // Demonstrates the Collatz conjecture.
 public class Collatz {
-	private static final int TARGET = 1;
-	private static final int EVEN_DIVISOR = 2;
-	private static final int ODD_MULTIPLIER = 3;
-	private static final int ODD_ADDEND = 1;
 	private static final String VERBOSE_MODE = "v";
 
-	public static void main(String[] args) {
-		int N = Integer.parseInt(args[0]);
+	public static void main(String args[]) {
+	    int n = Integer.parseInt(args[0]);
 		String mode = args[1];
-
-		for (int seed = 1; seed <= N; seed++) {
-			long current = seed;
-			int steps = 0;
-			String sequence = "";
-
-			if (mode.equals(VERBOSE_MODE)) {
-				sequence += current;
-			}
-
-			while (current != TARGET) {
-				if (current % EVEN_DIVISOR == 0) {
-					current /= EVEN_DIVISOR;
-				} else {
-					current = (current * ODD_MULTIPLIER) + ODD_ADDEND;
+		if (mode.equals(VERBOSE_MODE))
+		{
+			int c = 1;
+			for (c=1;c<n+1;c++)
+			{
+				int seed = c;
+				int steps = 1;
+				System.out.print(seed + " ");
+				while(seed!=1 || steps==1)
+				{
+					if (seed%2==0)
+					{
+						seed = seed/2;
+						System.out.print(seed + " ");
+					}
+					else
+					{
+						seed = (3*seed)+1;
+						System.out.print(seed + " ");
+					}
+					steps = steps + 1;
 				}
-
-				steps++;
-
-				if (mode.equals(VERBOSE_MODE)) {
-					sequence += " " + current;
-				}
+				System.out.print("(" + steps + ")");
+				System.out.println();
 			}
-
-			if (mode.equals(VERBOSE_MODE)) {
-				System.out.println(sequence + " (" + (steps + 1) + ")");
-			}
+			System.out.println("Every one of the first " + n + " hailstone sequences reached 1.");
 		}
-
-		System.out.println("Every one of the first " + N + " hailstone sequences reached 1.");
+		else
+		{
+			System.out.println("Every one of the first " + n + " hailstone sequences reached 1.");
+		}
 	}
 }
